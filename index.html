@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCTV Technician Certification Course | Learn in 15 Days & Start Earning</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              orange: '#f97316',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              dark: '#0a0705',
+              surface: '#170f0a',
+              card: '#22150e',
+              border: '#3c2417'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.08); }
+    }
+    
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.1); }
+      66% { transform: translate(-25px, 20px) scale(0.95); }
+    }
+
+    .animate-float-slow {
+      animation: floatOrb 18s ease-in-out infinite;
+    }
+    .animate-float-reverse {
+      animation: floatOrb 22s ease-in-out infinite reverse;
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    /* Modern Glass Surface */
+    .glass-panel {
+      background: rgba(23, 15, 10, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+    }
+    
+    .glass-panel-highlight {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      box-shadow: 0 12px 35px -10px rgba(249, 115, 22, 0.2);
+    }
+
+    /* Gradient Text Utility */
+    .gradient-text-orange {
+      background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .gradient-text-emerald {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Range slider styling */
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f97316;
+      cursor: pointer;
+      box-shadow: 0 0 15px #f97316;
+      border: 2px solid #ffffff;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+  </style>
+</head>
+<body class="bg-[#0a0705] text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-orange-500 selection:text-white font-sans">
+
+  <!-- Interactive Dynamic Motion Canvas -->
+  <canvas id="motionCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-70 w-full h-full"></canvas>
+
+  <!-- Floating Ambient Glowing Orbs -->
+  <div class="fixed top-[-10%] left-[15%] w-[450px] h-[450px] bg-orange-500/15 rounded-full blur-[120px] pointer-events-none animate-float-slow z-0"></div>
+  <div class="fixed top-[35%] right-[5%] w-[400px] h-[400px] bg-amber-500/12 rounded-full blur-[130px] pointer-events-none animate-float-reverse z-0"></div>
+  <div class="fixed bottom-[10%] left-[30%] w-[500px] h-[500px] bg-red-600/12 rounded-full blur-[140px] pointer-events-none animate-float-slow z-0"></div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10 md:space-y-14">
+
+    <!-- Top Header -->
+    <header class="flex flex-wrap items-center justify-between gap-4 py-3 border-b border-orange-950/80 pb-6">
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-3.5 w-3.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-orange-500 shadow-[0_0_10px_#f97316]"></span>
+        </span>
+        <div class="flex flex-col">
+          <span class="text-xs font-mono tracking-wider uppercase text-orange-400 font-semibold">Admissions Open • Limited 30 Seats</span>
+          <span class="text-xs text-slate-400">SEVA Foundation & Sinnar Digital Hub</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="#education" class="text-xs md:text-sm font-medium px-3.5 py-1.5 rounded-lg border border-orange-900/60 bg-stone-900/60 hover:border-orange-500/60 hover:text-orange-300 transition-all">
+          Courses
+        </a>
+        <a href="#earning" class="text-xs md:text-sm font-medium px-3.5 py-1.5 rounded-lg border border-orange-900/60 bg-stone-900/60 hover:border-orange-500/60 hover:text-orange-300 transition-all">
+          Income Calculator
+        </a>
+        <a href="#apply" class="text-xs md:text-sm font-semibold px-4 py-1.5 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all">
+          Book Your Seat
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="text-center pt-2 md:pt-6 space-y-6 max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-950/40 text-orange-300 text-xs md:text-sm font-medium tracking-wide shadow-[0_0_15px_rgba(249,115,22,0.15)]">
+        <svg class="w-4 h-4 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        15 DAYS INTENSIVE PRACTICAL BOOTCAMP
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15]">
+        Become a Certified <br class="hidden sm:block">
+        <span class="gradient-text-orange">CCTV & Security Technician</span>
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+        Learn end-to-end IP & HD camera installation, mobile remote viewing, and live field setup in just <strong class="text-white">15 days</strong>. Start taking client jobs or your own security contracts immediately.
+      </p>
+
+      <!-- Pricing Highlight Card -->
+      <div class="glass-panel-highlight max-w-xl mx-auto p-6 rounded-2xl border border-orange-500/50 shadow-[0_0_35px_rgba(249,115,22,0.25)] relative overflow-hidden">
+        <div class="absolute top-3 right-3 px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+          50% OFF Limited Offer
+        </div>
+        
+        <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2">Special Admission Fee</div>
+        
+        <div class="flex items-center justify-center gap-4">
+          <span class="text-2xl sm:text-3xl text-slate-500 line-through font-mono font-semibold">₹10,000</span>
+          <span class="text-4xl sm:text-5xl font-black text-white font-mono flex items-center gap-1">
+            <span class="text-orange-400">₹5,000</span>
+          </span>
+        </div>
+
+        <p class="text-xs text-slate-300 mt-2">
+          Complete practical lab access + study material + official certification included. No hidden charges.
+        </p>
+
+        <div class="pt-4 mt-4 border-t border-orange-500/20 flex items-center justify-center gap-2 text-xs font-mono text-amber-300">
+          <span>⚠️ Strict Batch Size: Only 30 Seats per cohort</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6-Box Course Highlights Grid -->
+    <section>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+        
+        <!-- Box 1 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all group">
+          <div class="text-3xl sm:text-4xl font-extrabold text-orange-400 group-hover:scale-105 transition-transform">15</div>
+          <div class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Days Training</div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all group">
+          <div class="text-3xl sm:text-4xl font-extrabold text-amber-400 group-hover:scale-105 transition-transform">100%</div>
+          <div class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Practical Lab</div>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center border-orange-500/40 bg-orange-950/25 hover:border-orange-400 hover:shadow-[0_0_25px_rgba(249,115,22,0.25)] transition-all group">
+          <div class="text-3xl sm:text-4xl font-extrabold text-white group-hover:scale-105 transition-transform">30</div>
+          <div class="text-xs sm:text-sm text-orange-200 font-semibold mt-1">Seats / Batch</div>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all group">
+          <div class="text-2xl sm:text-3xl font-extrabold text-orange-300 group-hover:scale-105 transition-transform">50%</div>
+          <div class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Fee Discount</div>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] transition-all group">
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-300 group-hover:scale-105 transition-transform">100%</div>
+          <div class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Job & Field Support</div>
+        </div>
+
+        <!-- Box 6 -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl text-center flex flex-col justify-center items-center border-emerald-500/40 bg-emerald-950/25 shadow-[0_0_20px_rgba(16,185,129,0.15)] hover:border-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all group">
+          <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 group-hover:scale-105 transition-transform">Certified</div>
+          <div class="text-xs sm:text-sm text-emerald-200 font-semibold mt-1">Skill Certificate</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education Section: 4 Specialized CCTV Courses -->
+    <section id="education" class="space-y-8 pt-4">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="text-xs font-mono uppercase bg-orange-950 text-orange-300 border border-orange-500/30 px-3.5 py-1 rounded-full">
+          Comprehensive Curriculum
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+          Our Specialized <span class="gradient-text-orange">CCTV Courses</span>
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base">
+          Choose from our expertly structured modules designed to take you from absolute beginner to master security contractor and business owner.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Course 1 -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-orange-950/80 hover:border-orange-500/50 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20">
+                1 Day Workshop
+              </span>
+              <span class="text-xl font-black text-orange-400 font-mono">₹499</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-orange-300 transition-colors mb-3">
+              1. CCTV & Security Foundations: Beginner’s Discovery Masterclass
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Ideal for absolute beginners. Learn core security concepts, camera variants (HD, Analog, AHD, CVI, TVI), fire alarm fundamentals, and career/business decision guidance in the security industry.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> What is HD Camera, CVI, TVI & AHD
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> Conventional Fire Alarm System Basics & Rules
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> Job vs CCTV Business Decision Guidance
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-orange-950/80 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">Duration: 1 Day</span>
+            <a href="#apply" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-orange-500/20 border border-orange-500/40 text-orange-300 hover:bg-orange-500 hover:text-slate-950 transition-all">
+              Enroll ₹499 &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-orange-950/80 hover:border-orange-500/50 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                5 Days Practical
+              </span>
+              <span class="text-xl font-black text-amber-400 font-mono">₹999</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors mb-3">
+              2. Practical CCTV & Fire Alarm Installation Blueprint
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Master the physical installation of cameras, DVR/XVR units, and fire alarm systems. Learn wiring diagrams, component handling, and proper site deployment techniques.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓</span> IP & Analog Camera Components & Planning
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓</span> Wiring Diagrams & Fire Alarm Practical Connections
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-amber-400 font-bold">✓</span> DVR/XVR & Camera Physical Installation
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-orange-950/80 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">Duration: 5 Days</span>
+            <a href="#apply" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition-all">
+              Enroll ₹999 &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-orange-950/80 hover:border-orange-500/50 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                10 Days Advanced
+              </span>
+              <span class="text-xl font-black text-emerald-400 font-mono">₹1,499</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-emerald-300 transition-colors mb-3">
+              3. Advanced IP Networking, NVR Configuration & Mobile Setup
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Dive deep into networking protocols, IP camera configuration, NVR/DVR online setup, and remote mobile viewing via iVMS and Smart PSS applications.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span> IP Camera & NVR Advanced Configuration
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span> iVMS & Smart PSS Software Setup
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span> Mobile Remote Viewing & Online NVR Integration
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-orange-950/80 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">Duration: 10 Days</span>
+            <a href="#apply" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition-all">
+              Enroll ₹1,499 &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Course 4 -->
+        <div class="glass-panel-highlight p-6 sm:p-7 rounded-2xl border border-orange-500/40 hover:border-orange-400 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/40 font-bold">
+                15 Days Bootcamp
+              </span>
+              <span class="text-xl font-black text-orange-400 font-mono">₹4,999</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-orange-200 transition-colors mb-3">
+              4. CCTV Business Expert Program
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Designed for entrepreneurs and technicians. Learn how to launch your CCTV business, generate sales, build a team, design big projects, create quotations, and handle troubleshooting like a pro.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> Business Launch, Sales Growth & Team Building
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> Big Project Design & Quotation Making
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-orange-400 font-bold">✓</span> Troubleshooting Masterclass & Live Case Studies
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-orange-500/20 flex items-center justify-between">
+            <span class="text-xs font-mono text-orange-300">Duration: 15 Days</span>
+            <a href="#apply" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 hover:from-orange-400 hover:to-amber-400 transition-all font-bold">
+              Enroll ₹4,999 &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Syllabus & Benefits Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Card 1: What You Will Learn (15-Day Practical Syllabus) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-orange-950/80 hover:border-orange-900/60 transition-all flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 mb-5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">
+            What You Learn in 15 Days
+          </h2>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Zero boring theory. Direct live hardware bench training to make you job and contract-ready.
+          </p>
+          
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">IP & Analog HD Cameras:</strong> Dome, Bullet, PTZ, night vision, and lenses installation.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">DVR / NVR & Hard Disk Setup:</strong> Storage sizing, recording formats, and backup retrieval.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Cable Crimping & Connectors:</strong> BNC, DC pin, RJ45 LAN crimping, CAT6 wiring, and PoE switches.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Networking & Mobile Viewing:</strong> Router port setup, static IP, and live remote access on smartphones.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Quotations & Business Skills:</strong> Conducting site surveys, customer billing, and wholesale hardware procurement.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-orange-950/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+          <span>Batch Type: Daily 2-Hour Practical</span>
+          <span>Duration: 15 Working Days</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Why Choose This Course (Career Return) -->
+      <div class="glass-panel-highlight p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+
+          <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">
+            High Demand & Fast Earnings
+          </h2>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Every shop, home, warehouse, and factory in Sinnar and Nashik needs CCTV. Good technicians make regular daily earnings.
+          </p>
+
+          <ul class="space-y-3.5 text-sm text-slate-300">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">₹500 to ₹1,500 Per Camera Installation:</strong> Earn pure labor charge per installation project.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Regular Maintenance Calls:</strong> Earn recurring revenue by servicing existing DVRs and offline camera issues.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Wholesale Dealer Tie-Ups:</strong> Get direct access to buy hardware at dealer wholesale prices.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-950 text-orange-400 flex items-center justify-center font-bold text-xs mt-0.5">✓</span>
+              <span><strong class="text-white">Recognized Certificate:</strong> Receive an official course certificate to build instant trust with customers.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-orange-500/20 flex items-center justify-between text-xs text-orange-300 font-mono">
+          <span>Investment: ₹5,000 only</span>
+          <span>Payback: Just 2 to 3 site installations</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Student Monthly Income Estimator -->
+    <section id="earning" class="glass-panel p-6 sm:p-8 rounded-2xl border border-orange-950/90 relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div class="text-center space-y-2">
+          <span class="text-xs font-mono text-orange-400 uppercase tracking-wider font-semibold">Self-Employment Calculator</span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-white">How Fast Can You Earn Your Fees Back?</h3>
+          <p class="text-slate-400 text-sm">
+            Calculate your monthly income based on simple camera installations in your local area.
+          </p>
+        </div>
+
+        <!-- Sliders -->
+        <div class="space-y-4 pt-4">
+          <div class="flex justify-between items-center text-sm font-medium">
+            <span class="text-slate-300">Cameras Installed per Month:</span>
+            <span class="text-orange-400 font-mono text-base font-bold" id="camCountLabel">20 Cameras</span>
+          </div>
+          <input type="range" id="camSlider" min="5" max="80" value="20" step="5" 
+                 class="w-full h-2 bg-stone-900 rounded-lg appearance-none cursor-pointer accent-orange-500">
+
+          <div class="flex justify-between items-center text-sm font-medium pt-2">
+            <span class="text-slate-300">Installation & Service Charge per Camera:</span>
+            <span class="text-amber-400 font-mono text-base font-bold" id="chargeLabel">₹700 / Camera</span>
+          </div>
+          <input type="range" id="chargeSlider" min="400" max="1500" value="700" step="100" 
+                 class="w-full h-2 bg-stone-900 rounded-lg appearance-none cursor-pointer accent-amber-500">
+        </div>
+
+        <!-- Metric Output -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+          <div class="p-4 rounded-xl bg-stone-950/90 border border-orange-950/80 text-center">
+            <div class="text-xs text-slate-400 uppercase font-mono">Your Estimated Monthly Income</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-orange-400 font-mono mt-1" id="monthlyStudentIncome">₹14,000</div>
+          </div>
+          <div class="p-4 rounded-xl bg-stone-950/90 border border-orange-500/40 text-center shadow-[0_0_20px_rgba(249,115,22,0.15)]">
+            <div class="text-xs text-emerald-400 uppercase font-mono font-semibold">Course Fee Recovery Time</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono mt-1" id="recoveryDays">Within 10 Days</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admission & Booking CTA Section -->
+    <section id="apply" class="glass-panel p-8 sm:p-12 rounded-3xl border border-orange-500/40 text-center relative overflow-hidden shadow-[0_0_40px_rgba(249,115,22,0.18)]">
+      <div class="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none"></div>
+
+      <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+        <span class="inline-block text-xs font-mono uppercase bg-orange-950 text-orange-300 border border-orange-500/30 px-3.5 py-1 rounded-full">
+          Batch Starting Soon
+        </span>
+
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+          Secure Your Seat for ₹5,000 Today
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base">
+          Due to bench lab equipment and individual practical tools, we only take <strong class="text-white">30 students per batch</strong>. Call us directly to book your admission or visit our center.
+        </p>
+
+        <!-- Direct Dial Buttons -->
+        <div class="flex flex-wrap justify-center items-center gap-4 pt-2">
+          <a href="tel:+917770006357" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-sm shadow-[0_0_25px_rgba(249,115,22,0.4)] transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call Rahul Chine (+91 77700 06357)
+          </a>
+          <a href="tel:+919075655637" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-sm shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call Akshay Chine (+91 90756 55637)
+          </a>
+          <button id="copyContactBtn" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-orange-900/60 text-white font-medium text-sm transition-all">
+            <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+            </svg>
+            <span id="copyBtnText">Copy Center Address & Numbers</span>
+          </button>
+        </div>
+
+        <!-- Contact Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 text-left max-w-lg mx-auto">
+          <div class="p-4 rounded-xl bg-stone-950/90 border border-orange-500/30 hover:border-orange-400/60 transition-all">
+            <div class="text-xs font-mono text-orange-400 uppercase font-semibold">Contact</div>
+            <div class="font-bold text-white text-base mt-1">Rahul Chine</div>
+            <a href="tel:+917770006357" class="text-orange-300 font-mono text-sm hover:underline block mt-0.5 font-semibold">+91 77700 06357</a>
+          </div>
+          <div class="p-4 rounded-xl bg-stone-950/90 border border-amber-500/30 hover:border-amber-400/60 transition-all">
+            <div class="text-xs font-mono text-amber-400 uppercase font-semibold">Contact</div>
+            <div class="font-bold text-white text-base mt-1">Akshay Chine</div>
+            <a href="tel:+919075655637" class="text-amber-300 font-mono text-sm hover:underline block mt-0.5 font-semibold">+91 90756 55637</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-orange-950 text-xs sm:text-sm text-slate-400 font-mono space-y-1">
+          <div><strong class="text-white">Training Hub:</strong> Sinnar Digital Services & SEVA Foundation</div>
+          <div><strong class="text-white">Location:</strong> Shop No. 12, Kamala Market, Sinnar, Nashik, Maharashtra</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-xs text-stone-500 font-mono py-4 border-t border-orange-950/80">
+      15-Day CCTV Technician Professional Certification Course • Sinnar, Nashik
+    </footer>
+
+  </div>
+
+  <script>
+    /* ==========================================================
+       Interactive Motion Background Canvas (Orange & Amber Network)
+       ========================================================== */
+    const canvas = document.getElementById('motionCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 120 };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.radius = Math.random() * 2 + 1;
+        this.color = Math.random() > 0.35 ? 'rgba(249, 115, 22, ' : 'rgba(245, 158, 11, ';
+        this.alpha = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        if (mouse.x !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x -= (dx / dist) * force * 2;
+            this.y -= (dy / dist) * force * 2;
+          }
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.alpha + ')';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.min(Math.floor((width * height) / 14000), 75);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function drawNetwork() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(249, 115, 22, ${0.15 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Grid Scanlines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
+      ctx.lineWidth = 1;
+      const step = 90;
+      for (let x = 0; x < width; x += step) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += step) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      drawNetwork();
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    resizeCanvas();
+    animate();
+
+    /* ==========================================================
+       Student Earning & Fee Payback Calculator Logic
+       ========================================================== */
+    const camSlider = document.getElementById('camSlider');
+    const chargeSlider = document.getElementById('chargeSlider');
+    const camCountLabel = document.getElementById('camCountLabel');
+    const chargeLabel = document.getElementById('chargeLabel');
+    const monthlyStudentIncome = document.getElementById('monthlyStudentIncome');
+    const recoveryDays = document.getElementById('recoveryDays');
+
+    function updateStudentCalc() {
+      const cams = parseInt(camSlider.value, 10);
+      const charge = parseInt(chargeSlider.value, 10);
+
+      camCountLabel.textContent = cams + ' Cameras';
+      chargeLabel.textContent = '₹' + charge.toLocaleString('en-IN') + ' / Camera';
+
+      const totalMonthly = cams * charge;
+      monthlyStudentIncome.textContent = '₹' + totalMonthly.toLocaleString('en-IN');
+
+      // Payback calculation for ₹5000 fee
+      const camsToPayback = Math.ceil(5000 / charge);
+      if (cams >= camsToPayback) {
+        recoveryDays.textContent = `Within ${camsToPayback} Camera Jobs!`;
+      } else {
+        recoveryDays.textContent = `Within 1 Month`;
+      }
+    }
+
+    camSlider.addEventListener('input', updateStudentCalc);
+    chargeSlider.addEventListener('input', updateStudentCalc);
+    updateStudentCalc();
+
+    /* ==========================================================
+       Clipboard Action for Center & Contact Details
+       ========================================================== */
+    const copyBtn = document.getElementById('copyContactBtn');
+    const copyText = document.getElementById('copyBtnText');
+
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = "CCTV Technician 15-Day Course (Fees: ₹5,000) | Contact: Rahul Chine (+91 77700 06357) / Akshay Chine (+91 90756 55637) | Address: Shop No. 12, Kamala Market, Sinnar, Nashik, Maharashtra";
+      const tempInput = document.createElement("textarea");
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        copyText.textContent = "Details Copied!";
+        setTimeout(() => {
+          copyBtnText.textContent = "Copy Center Address & Numbers";
+        }, 2500);
+      } catch (err) {
+        copyBtnText.textContent = "+91 77700 06357 / +91 90756 55637";
+      }
+      document.body.removeChild(tempInput);
+    });
+  </script>
+</body>
+</html>
